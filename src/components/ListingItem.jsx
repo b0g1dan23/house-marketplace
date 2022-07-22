@@ -3,7 +3,7 @@ import { ReactComponent as DeleteIcon } from "../assets/svg/deleteIcon.svg";
 import bedIcon from "../assets/svg/bedIcon.svg";
 import bathtubIcon from "../assets/svg/bathtubIcon.svg";
 
-function ListingItem({ listing, id }) {
+function ListingItem({ listing, id, onDelete }) {
   return (
     <li className="categoryListing">
       <Link
@@ -36,9 +36,23 @@ function ListingItem({ listing, id }) {
                 ? `${listing.bedrooms} Bedrooms`
                 : `1 Bedroom`}
             </p>
+            <img src={bathtubIcon} alt="Bathtub" />
+            <p className="categoryListingInfoText">
+              {listing.bathrooms > 1
+                ? `${listing.bathrooms} Bathrooms`
+                : `1 Bedroom`}
+            </p>
           </div>
         </div>
       </Link>
+
+      {onDelete && (
+        <DeleteIcon
+          fill="rgb(231,76,60)"
+          className="removeIcon"
+          onClick={() => onDelete(listing.id, listing.name)}
+        />
+      )}
     </li>
   );
 }
